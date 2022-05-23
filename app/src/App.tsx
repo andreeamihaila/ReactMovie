@@ -1,25 +1,27 @@
 import { format } from 'path';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import{BrowserRouter,Routes,Route} from "react-router-dom"
-import MovieList from './Pages/Home/component/MovieList';
 import Home from './Pages/Home/Home';
-//import About from './Pages/About/About';
+import {Review} from './Pages/Review/Reviews';
+import { IMovie } from './Types/movies';
+import MovieCard from './Components/MovieCard';
+import AddReview from './Pages/AddReview/AddReview';
 
+function App(props:IMovie) {
 
-function App() {
   return (
+    <>
     <div>
     <BrowserRouter>
-
     <Routes>
     <Route path="/" element={<Home/>}></Route>
-    {/* <Route path="/about" element={<About/>}></Route> */}
-    <Route path="/MovieList/:id" element={<MovieList/>}></Route>
-     
+    <Route path="/reviews" element={<Review />}></Route>
+    <Route path="/reviews/addReview" element={<AddReview/>}></Route>
+    {/* <Route path="/review/editReview" element={<EditReview/>}></Route> */}
     </Routes>
     </BrowserRouter>
     </div>
-    
+    </>
   );
 }
 

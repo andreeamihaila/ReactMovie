@@ -9,7 +9,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <App Title={''} Year={''} imdbID={''} Type={''} Poster={''} />
+{/* nu stiu de ce mi-a reparat asa */}
+
   </React.StrictMode>
 );
 

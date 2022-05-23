@@ -17,4 +17,7 @@ code {
 .active{
   color:wheat
 }
-
+.form{
+  display: flex;
+  position:-ms-page;
+}
