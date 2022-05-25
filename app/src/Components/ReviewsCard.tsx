@@ -1,6 +1,7 @@
 import React from "react";
 import { IReviews } from "../Types/IReviews";
 import { NavLink, useNavigate } from "react-router-dom";
+import UpdateReview from "../Pages/UpdateReview/UpdateReview";
 //import { Link } from "react-router-dom";
 
 interface IReviewCardProp {
@@ -17,6 +18,7 @@ function ReviewsCard(reviews: IReviewCardProp) {
     <>
       {reviews.reviews.map((review: IReviews) => {
         return (
+          <>
           <div className="flex flex-row flex justify-center ">
             <div className="card card-compact w-96 bg-base-100 shadow-xl bg-orange-50 m-5 ">
               <div className="card-body ">
@@ -31,6 +33,8 @@ function ReviewsCard(reviews: IReviewCardProp) {
               </div>
             </div>
           </div>
+          
+          </>
         );
       })}
     </>

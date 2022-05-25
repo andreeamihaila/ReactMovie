@@ -17,7 +17,7 @@ function App(props: IMovie) {
             <Route path="/" element={<Home />}></Route>
             <Route path="/reviews" element={<Review />}></Route>
             <Route path="/reviews/addReview" element={<AddReview />}></Route>
-            <Route path="/reviews/editReview" element={<UpdateReview />}></Route>
+            {/* <Route path="/reviews/editReview" element={<UpdateReview />}></Route> */}
 
           </Routes>
         </BrowserRouter>

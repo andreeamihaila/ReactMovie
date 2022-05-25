@@ -15,7 +15,6 @@ export const Review = () => {
       <div>{review?.title}</div>
       <div>{review?.body}</div>
     </div> */}
-    <UpdateReview review={review!}/>
     </>
   );
 };
