@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { IReviews } from "../../Types/IReviews";
 import ReviewsCard from "../../Components/ReviewsCard";
+import { useGetReviews } from "../../hooks/useGetReviews";
 
 export const Review = () => {
   const navigateHome = useNavigate();
@@ -16,36 +17,25 @@ export const Review = () => {
   const handleClickAdd = () => {
     navigateAdd(`/reviews/addReview`);
   };
-
-  const [reviews, setReviews] = useState<IReviews[]>([] as IReviews[]);
-
-  useEffect(() => {
-    getData();
-  }, []);
-  //READ
-  const getData = async () => {
-    await fetch(
-      "https://crudcrud.com/api/c13b6c80c77349cb84353bb63101c7e0/reviews"
-    )
-      .then((res) => res.json())
-      .then((data) => setReviews(data))
-      .catch((err) => {
-        console.log(err);
-      }); 
-  };
+    
+   const {isLoanding,isError,reviews}=useGetReviews()
 
   return (
     <>
+    <div>
+      {isLoanding && <p>isLoanding...</p>}
+    </div>
+    <div>{isError && <p>something went wrong...</p>}</div>
       <div className="text-2xl pb-4 justify-items-center  flex justify-center">
         Number of reviews:{reviews.length}
       </div>
-      <div className="card-actions justify-end">
-      <button className="btn btn-accent" onClick={() => handleClickAdd()}>
-        Add Review
-      </button>
-      <button className="btn btn-active" onClick={() => handleClickHome()}>
-        Back Home
-      </button>
+      <div className="card-actions justify-center">
+        <button className="btn btn-accent" onClick={() => handleClickAdd()}>
+          Add Review
+        </button>
+        <button className="btn btn-active" onClick={() => handleClickHome()}>
+          Back Home
+        </button>
       </div>
       <div>
         <ReviewsCard reviews={reviews} />

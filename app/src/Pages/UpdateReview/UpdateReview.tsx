@@ -1,43 +1,36 @@
 import React from "react";
-import { useState } from "react";
-import axios from "axios";
 import { IReviews } from "../../Types/IReviews";
+import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { resolveTypeReferenceDirective } from "typescript";
-import { usePostReviews } from "../../hooks/usePostReviews";
-import yup from "yup";
-import { useForm } from "react-hook-form";
+import { useUpdateReviews } from "../../hooks/useUpdateReviews";
+interface IUpdateProps {
+  review: IReviews;
+}
 
-// const schema = yup.object({
-//   title: yup.string().required().min(2).max(10),
-//   body: yup.string().required().min(5).max(60),
-// });
-
-function AddReview() {
+const UpdateReview = ({ review }: IUpdateProps) => {
+  const [title, setTitle] = useState(review.title);
+  const [body, setBody] = useState(review.body);
+  
   const navigateBack = useNavigate();
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  //const { register, formState } = useForm();
-  const { isError, isLoanding, createReview } = usePostReviews();
 
-  const handleCreateReview = async (e: React.FormEvent<HTMLFormElement>) => {
+  const {isError,isLoanding,updateReview}=useUpdateReviews()
+  const handleUpdateReview=async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await createReview({
-      title,
-      body,
+    await updateReview({
+      id:review.id,title,body
     });
     setTitle("");
     setBody("");
   };
 
   return (
-    <>
+    <div>
       <div className="grid justify-items-center">
         <form
-          onSubmit={handleCreateReview}
+          onSubmit={handleUpdateReview}
           className="grid justify-items-center pt-4"
         >
-          <div className="text-2xl pb-4">CREATE NEW REVIEW</div>
+          <div className="text-2xl pb-4">EDIT REVIEW</div>
           <input
             type="text"
             value={title}
@@ -55,7 +48,7 @@ function AddReview() {
           ></textarea>
           <div className="card-actions justify-end">
             <button className="btn btn-secondary" type="submit">
-              Submit
+              Edit
             </button>
             <button
               className="btn"
@@ -67,7 +60,8 @@ function AddReview() {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
-}
-export default AddReview;
+};
+
+export default UpdateReview;
